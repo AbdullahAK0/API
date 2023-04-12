@@ -50,7 +50,8 @@ public class C11_Get_ExpectedDataOlusturma {
 
         // 4 - Assertion
 
-        // NOT : Oncelikle gereken sey Response'i JSONPath objesine donusturmek
+        // NOT : Donen Response'in objesi ile islem yapmak istiyorsak
+        // Oncelikle gereken sey Response'i JSONPath objesine donusturmek
 
         JsonPath resJsonPath = response.jsonPath();
 
