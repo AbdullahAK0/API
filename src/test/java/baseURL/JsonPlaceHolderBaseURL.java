@@ -16,6 +16,7 @@ public class JsonPlaceHolderBaseURL {
         specJsonPlace = new RequestSpecBuilder()
                                     .setBaseUri("https://jsonplaceholder.typicode.com")
                                     .build();
+
     }
 
 
