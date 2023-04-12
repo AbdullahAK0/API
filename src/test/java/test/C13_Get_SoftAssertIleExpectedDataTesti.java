@@ -13,6 +13,7 @@ public class C13_Get_SoftAssertIleExpectedDataTesti {
     /*
     http://dummy.restapiexample.com/api/v1/employee/3 url’ine bir GET request
     gonderdigimizde donen response’un asagidaki gibi oldugunu test edin.
+
         Response Body
         {
         "status":"success",
@@ -27,15 +28,14 @@ public class C13_Get_SoftAssertIleExpectedDataTesti {
         }
      */
 
-
     @Test
     public void get01(){
 
-        // 1 - Url olustur.
+        // 1 - Url hazirla
 
         String url = "http://dummy.restapiexample.com/api/v1/employee/3";
 
-        // 2- Expected Data hazirla
+        // 2 - Expected Data hazirla
 
         /*
         {
@@ -59,11 +59,15 @@ public class C13_Get_SoftAssertIleExpectedDataTesti {
         data.put("employee_age",66);
         data.put("profile_image","");
 
-        JSONObject exbody = new JSONObject();
+        JSONObject expBody = new JSONObject();
 
-        exbody.put("status","success");
-        exbody.put("message","Successfully! Record has been fetched.");
-        exbody.put("data",data);
+        expBody.put("status","success");
+        expBody.put("message","Successfully! Record has been fetched.");
+        expBody.put("data",data);
+
+        System.out.println("expBody = " + expBody);
+
+        // 3 - Response'i kaydet
 
         Response response = given().when().get(url);
 
@@ -75,16 +79,17 @@ public class C13_Get_SoftAssertIleExpectedDataTesti {
 
         SoftAssert softAssert = new SoftAssert();
 
-        softAssert.assertEquals(respJS.get("status"),exbody.get("status"));
-        softAssert.assertEquals(respJS.get("message"),exbody.get("message"));
-        softAssert.assertEquals(respJS.get("data.id"),exbody.getJSONObject("data").get("id"));
-        softAssert.assertEquals(respJS.get("employee_name"),exbody.getJSONObject("data").get("employee_name"));
-        softAssert.assertEquals(respJS.get("employee_salary"),exbody.getJSONObject("data").get("employee_salary"));
-        softAssert.assertEquals(respJS.get("employee_age"),exbody.getJSONObject("data").get("employee_age"));
-        softAssert.assertEquals(respJS.get("profile_image"),exbody.getJSONObject("data").get("profile_image"));
+        softAssert.assertEquals( respJS.get("status") , expBody.get("status"));
+        softAssert.assertEquals( respJS.get("message") , expBody.get("message"));
+        softAssert.assertEquals( respJS.get("data.id") , expBody.getJSONObject("data").get("id"));
+        softAssert.assertEquals( respJS.get("data.employee_name") , expBody.getJSONObject("data").get("employee_name"));
+        softAssert.assertEquals( respJS.get("data.employee_salary") , expBody.getJSONObject("data").get("employee_salary"));
+        softAssert.assertEquals( respJS.get("data.employee_age") , expBody.getJSONObject("data").get("employee_age"));
+        softAssert.assertEquals( respJS.get("data.profile_image") , expBody.getJSONObject("data").get("profile_image"));
 
         softAssert.assertAll();
 
-
     }
+
+
 }
